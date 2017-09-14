@@ -48,7 +48,7 @@
                 
                 // bounce off the paddle
                 // the absolute value of the position of the x in the ellipse and the position of the X of the mouse need to be within half the paddle. the width of the paddle is width/6 so half of that would be width/12.
-                if (y > height-35 && abs(mouseX - x) < width/12 && y < height - 25 + ySpeed) {
+                if (y > height-55 && abs(mouseX - x) < width/12 && y < height - 25 + ySpeed) {
                     ySpeed = ySpeed*(-1.2);
                     xSpeed = xSpeed*(1.2);
                 }
@@ -56,11 +56,11 @@
                 // rect ( x, y, width, height, radius for rounded corners)
                 // (height - 30) will make it at the BOTTOM of the screen. 0x0 is top left
                 // (width / 20) is a way to ensure that the paddle is a fraction of the width rather than set
-                rect(mouseX, (height - 30), (width / 20), 10, 5);
+                rect(mouseX, (height - 30), (width / 10), 30, 5);
                 // after just this, it will create the right paddle but it has a trail. Need to add background('white').
                
                 // ellipse ( x, y, width, height)
-                ellipse(x,y,10,10);
+                ellipse(x,y,30,30);
             }
         </script>
     </head>
