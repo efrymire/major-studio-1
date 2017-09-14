@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--p5 core library CDN-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+        <script>
+            // global variables for use in anything (set up or draw)
+            // arrays allow us to have more than one ball 
+            var x = [], 
+                y = [],
+                xSpeed = [],
+                ySpeed = [];
+           
+           var quanitity = 10;
+           
+            function setup() {
+                createCanvas(500, 500);
+                rectMode(CENTER);
+                
+                for (var i = 0; i<quantity; i++) {
+                    x[i] = random(width);
+                    y[i] = random(height); 
+                    xSpeed[i] = random(-2.5, 2.5);
+                    ySpeed[i] = random(-2.5, 2.5);
+                }
+                
+            }
+            
+            function draw() {
+                background('black');
+                fill('white');
+                
+                for (var i=0; i<quantity; i++) {
+                    x[i] = x[i] + xSpeed[i];
+                    y[i] = y[i] + ySpeed[i];
+                    
+                    // left and right boundary
+                    if (x[i] > width - 10 || x[i] < 10) {
+                        xSpeed[i] = xSpeed[i]*(-1); 
+                    }
+                    
+                    // top and bottom boundary
+                    if (y[i] < 0 - 10) {
+                        ySpeed[i] = ySpeed[i]*(-1);
+                    }
+                    
+                    // bounce off the paddle
+                    if (y[i] > height-35 && abs(mouseX - x[i]) < width/12 && y[i] < height - 25 + ySpeed[i]) {
+                        ySpeed[i] = ySpeed[i]*(-1.2);
+                        xSpeed[i] = xSpeed[i]*(1.2);
+                    }
+                    
+                    ellipse(x[i],y[i],10,10);
+                }
+                
+                rect(mouseX, (height - 30), (width / 20), 10, 5);
+            }
+        </script>
+    </head>
+    <body>
+    
+    </body>
+</html>

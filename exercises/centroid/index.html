@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--p5 core library CDN-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+       
+        <script>
+            //set the x and y values as arrays to calculate the centroid
+            var x = [];
+            var y = [];
+            
+            //you can put a comma in between variables, and p5 automatically sees all as variables set to 0
+            var cX, cY;
+            var a;
+            
+            function setup() {
+                createCanvas(windowWidth, windowHeight);
+                fill(255, 100, 0, 128);
+            }
+            
+            function mouseReleased() {
+                //removes the trailing in the element
+                background('white');
+                fill('pink')
+                
+                //determine if you've clicked more than once bc one click you need to consider that one click two times
+                if (x.length > 0) {
+                    //put the point to the special place index 1...we splice the new position mouseX and mouseY at 1
+                    x.splice(1, 0, mouseX);
+                    y.splice(1, 0, mouseY);
+                }
+                else {
+                    // add two identical points to the array
+                    //this is the horizontal position of the mouse x and y -- this is where the mouseReleased functionw will take place
+                    x.push(mouseX);
+                    y.push(mouseY);
+                    
+                    //repeat this again to repeat the point with one click so the first click is included in the centroid calculation... the FIRST and LAST point in the centroid calculation must be identical
+                    x.push(mouseX);
+                    y.push(mouseY);
+                }
+                
+                
+                //call the display funciton everytime you release the mouse
+                display();
+            }
+            
+            function display() {
+                a = 0;
+                cX = 0;
+                cY = 0;
+                
+                //for functions have 4 components -- included below. THey have labels like test, etc.
+                for (var i=0; i<x.length-1; i++) {
+                    //+= is the same as SUM -- makes sure you take the current value and add to it - always increase from where you currently are rather than assign and override
+                    cX += (x[i] + x[i+1]) * (x[i]*y[i+1] - x[i+1]*y[i]);
+                    cY += (y[i] + y[i+1]) * (x[i]*y[i+1] - x[i+1]*y[i]);
+                    a += x[i]*y[i+1] - x[i+1]*y[i];
+                }
+                
+                a = 0.5 * a; // a*=.5 would work too
+                cX = cX / (6*a); // cX /= 6*a would be a more concise view of it. it is written this way because the value that comes from cX/6a is the assignment to cX. It needs to be defined as a value
+                cY - cY / (6*a);
+                
+                //draw polygon
+                beginShape();
+                    for(var i=0; i<x.length; i++) {
+                        vertex(x[i], y[i]);
+                        text(i, x[i],y[i]);
+                    }
+                endShape(CLOSE);
+                
+                fill('blue');
+                ellipse(cX, cY, 10, 10);
+            }
+            
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>

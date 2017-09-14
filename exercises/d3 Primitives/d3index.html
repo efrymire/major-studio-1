@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+
+    <body>
+        <script>
+            d3.select('body')
+                .append('svg')
+                .attr('width', window.innerWidth)
+                .attr('height', 500);
+            
+            var svg = d3.select('svg');
+            
+            svg.append('circle')
+                .attr('r', 20)
+                .attr('cx', 200)
+                .attr('cy', 75);
+                
+            svg.append('rect')
+                .attr('x', 300)
+                .attr('y', 50)
+                .attr('width', 50)
+                .attr('height', 50);
+                
+            svg.append('polygon')
+                .attr('points', '60,30 100,50 100,90 60,110 20,90 20,50')
+                .attr('transform','translate(120,0) scale(2)');
+        </script>
+    </body>
+</html>
+
+<!-- TRANSLATE/TRANSFORM NOTES:
+
+translate needs quotes because it is already a string, 
+as does the attribute of scale
+                .attr('transform','translate(400,0)');
+                .attr('transform','scale(2)');
+to do both, you need one line of code on the 'transform' line and in the same
+set of quotes:
+
+                .attr('transform','translate(400,0) scale(2)');
+                
+you can also use CSS styling for this:
+
+    <style type="text/css">
+        polygon {
+            translate: transform(400px,0);
+        }
+    </style>
+
+--!>

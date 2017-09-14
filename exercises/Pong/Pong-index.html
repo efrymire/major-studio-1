@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--p5 core library CDN-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.min.js"></script>
+        <script>
+           // global variables for use in anything (set up or draw)
+           var x, y, xSpeed, ySpeed;
+           
+            // p5 calls setup() exactly once when the canvas loads
+            function setup() {
+                createCanvas(windowWidth, windowHeight);
+                // flexible window sizes won't be helpful in the pong game. Could do windowWidth or windowHeight or a set value
+                rectMode(CENTER); // this makes the mouse the center of the paddle. not the far left, where the rect origin usually is. 
+                x = random(width);
+                y = random(height); //height references the height of the canvas, and this is why it is AFTER the canvas
+                xSpeed = random(-2.5, 2.5);
+                ySpeed = random(-2.5, 2.5);
+                // by creating a vector of -2.5 to 2.5, it allows the ball to go in multiple directions
+            }
+            
+            function draw() {
+                // background has to be at the beginning of draw or else it will reset to the white background before it even appears on the screen.
+                background('black');
+                fill('white'); //fill is global
+                
+                // position update
+                x = x + xSpeed;
+                // x position needs to be reassigned
+                y = y + ySpeed;
+                // x position needs to be reassigned
+                
+                // boundaries to bounce 
+                // the bounce to make it return is to multiply the SPEED times -1 so it reverses the direction of the ball 
+                if (x > width - 10) { //right boundary only 
+                    xSpeed = xSpeed*(-1); //reassigning the xSpeed to be in the negative direction
+                    // ySpeed isn't reassigned with the walls, it still continues downward
+                }
+                if (x < 10) {
+                    xSpeed = xSpeed*(-1);
+                }
+                // you can bring both of the left and right boundaries together with an or condition as ||
+                
+                // top and bottom boundary
+                if (y < 0 - 10) {
+                    ySpeed = ySpeed*(-1);
+                }
+                
+                // bounce off the paddle
+                // the absolute value of the position of the x in the ellipse and the position of the X of the mouse need to be within half the paddle. the width of the paddle is width/6 so half of that would be width/12.
+                if (y > height-35 && abs(mouseX - x) < width/12 && y < height - 25 + ySpeed) {
+                    ySpeed = ySpeed*(-1.2);
+                    xSpeed = xSpeed*(1.2);
+                }
+                
+                // rect ( x, y, width, height, radius for rounded corners)
+                // (height - 30) will make it at the BOTTOM of the screen. 0x0 is top left
+                // (width / 20) is a way to ensure that the paddle is a fraction of the width rather than set
+                rect(mouseX, (height - 30), (width / 20), 10, 5);
+                // after just this, it will create the right paddle but it has a trail. Need to add background('white').
+               
+                // ellipse ( x, y, width, height)
+                ellipse(x,y,10,10);
+            }
+        </script>
+    </head>
+    <body>
+    
+    </body>
+</html>
