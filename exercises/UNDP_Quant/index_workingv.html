@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <title>Gini Coefficient & Top Fifth Quantile</title>
+        <link href="style.css" type="text/css" rel="stylesheet">
+    </head>
+
+    <body>
+        
+        <h1>How does the Gini coefficient relate to the income share of the top fifth quintile?</h1>
+        
+        <p> 
+        The gini coefficient is a is a measure of statistical dispersion intended to represent the income or wealth distribution of a nation's residents, and is the most commonly used measure of inequality. 
+        The value of q5 (the fifth quintile) represents the share of total income going to the wealthiest 25% of the population. For example, if q5 is 50%, that means that 50% of total income is earned by the top 1/5th wealthiest households.
+        </p>
+        
+        <div id='target'></div>
+        
+        <script>
+                
+            var leftGraph = d3.select('#target')
+                .append('svg')
+                .attr('width', window.innerWidth)
+                .attr('height', 3500);
+            
+            d3.csv('wiid_dummy.csv', function(error, data) {
+                if (error) throw error;
+                
+                svg(data);
+            });
+            
+            // key
+            leftGraph.append('rect')
+                .attr('class', 'bar')
+                .attr('x', 0)
+                .attr('y', 0)
+                .attr('width', 10)
+                .attr('height', 10)
+                .attr('fill','red');
+                
+            leftGraph.append('rect')
+                .attr('class', 'bar')
+                .attr('x', 0)
+                .attr('y', 15)
+                .attr('width', 10)
+                .attr('height', 10);
+                
+            leftGraph.append('text')
+                .text(' = Gini Coefficient')
+                .attr('x', 15)
+                .attr('y', 10)
+                
+            leftGraph.append('text')
+                .text(' = q5 income share')
+                .attr('x', 15)
+                .attr('y', 25)
+                
+            function svg(data) {
+                var qFive = [];
+                for(var i in data) {
+                    qFive.push(data[i].q5);
+                }
+                var q5max = d3.max(qFive);
+                console.log(q5max);
+                
+                var qOne = [];
+                for(var i in data) {
+                    qOne.push(data[i].q1);
+                }
+                var q1max = d3.max(qOne);
+                console.log(q1max);
+                
+                var x = d3.scaleLinear()
+                    .domain([0, q1max])
+                    .range([0, window.innerHeight]);
+                    
+                var y = d3.scaleLinear()
+                    .domain([0, data.length])
+                    .range([0, window.innerWidth]);
+                    
+                leftGraph.append('g')
+                    .attr('id', 'group');
+                    
+                var group = leftGraph.select('#group')
+                    .selectAll('g')
+                    .data(data)
+                    .enter()
+                    .append('g')
+                    .attr('y', function(d, i) { return y(i); })
+                    .attr('transform', function(d, i) {
+                        return 'translate(0,' + (y(i)*22) + ')';
+                });
+                
+                // // q1 bar
+                // leftGraph.append('rect')
+                //     .attr('class', 'bar')
+                //     .attr('x', 0)
+                //     .attr('y', function(d,i) { return (56 + (i*22)); })
+                //     .attr('width', function(d, i) { return x(d.q1); })
+                //     .attr('height', function(d, i) { return y(10) ; });
+                    
+                // q5 bar
+                group.append('rect')
+                    .attr('class', 'bar')
+                    .attr('x', (window.innerWidth - (function(d, i) { return x(d.q5); })))
+                    .attr('y', function(d,i) { return (60 + (i*22)); })
+                    .attr('width', function(d, i) { return x(d.q5); })
+                    .attr('height', 10);
+            	
+            	// gini coefficient bar
+            // 	group.append('rect')
+            //         .attr('class', 'bar')
+            //         .attr('fill', 'red')
+            //         .attr('x', 0)
+            //         .attr('y', function(d,i) { return (56 + (i*22)); })
+            //         .attr('width', function(d, i) { return x(d.avggini); })
+            //         .attr('height', function(d, i) { return y(10) ; });
+                    
+                // associated text
+                
+                // group.append('text')
+                //     .text(
+                //         if (d.country != '') {
+                //             function(d) { return (d.country) + '  | Gini: ' + (d.avggini) + '  | q5: ' + (d.q5); })
+                //         } else { return ''}
+                //     .attr('transform', function(d, i) { return 'translate(0, '+ (53 + (i*22)) + ')'});
+                
+                group.append('text')
+                    .text(function(d) { return (d.country) + '  | Gini: ' + (d.avggini) + '  | q5: ' + (d.q5); })
+                    .attr('transform', function(d, i) { return 'translate(0, '+ (53 + (i)) + ')'});
+                
+            }
+            
+        </script>
+    </body>
+</html>

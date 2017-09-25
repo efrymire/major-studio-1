@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <title>Gini Coefficient & Top Fifth Quantile</title>
+        <link href="style.css" type="text/css" rel="stylesheet">
+    </head>
+
+    <body>
+        
+        <h1>How does the Gini coefficient relate to the income share of the top fifth quintile?</h1>
+        
+        <p> 
+        The gini coefficient is a is a measure of statistical dispersion intended to represent the income or wealth distribution of a nation's residents, and is the most commonly used measure of inequality. 
+        The value of q5 (the fifth quintile) represents the share of total income going to the wealthiest 25% of the population. For example, if q5 is 50%, that means that 50% of total income is earned by the top 1/5th wealthiest households.
+        </p>
+        
+        <div id='target'></div>
+        
+        <script>
+            
+            var	margin = {top: 30, right: 10, bottom: 30, left: 10},
+            	width = window.innerWidth/2,
+            	height = 4000 - margin.top - margin.bottom;
+            
+            var leftGraph = d3.select('#target')
+                .append('svg')
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                
+            var rightGraph = d3.select('#target')
+                .append('svg')
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+            
+            d3.csv('wiid_data.csv', function(error, data) {
+                if (error) throw error;
+                
+                svg(data);
+            });
+            
+            // key
+            // leftGraph.append('rect')
+            //     .attr('class', 'bar')
+            //     .attr('x', 0)
+            //     .attr('y', 0)
+            //     .attr('width', 10)
+            //     .attr('height', 10)
+            //     .attr('fill','red');
+                
+            // leftGraph.append('rect')
+            //     .attr('class', 'bar')
+            //     .attr('x', 0)
+            //     .attr('y', 15)
+            //     .attr('width', 10)
+            //     .attr('height', 10);
+                
+            // leftGraph.append('text')
+            //     .text(' = Gini Coefficient')
+            //     .attr('x', 15)
+            //     .attr('y', 10)
+                
+            // leftGraph.append('text')
+            //     .text(' = q5 income share')
+            //     .attr('x', 15)
+            //     .attr('y', 25)
+                
+            function svg(data) {
+                
+                var qOne = [];
+                for(var i in data) {
+                    qOne.push(data[i].q1);
+                }
+                var q1max = d3.max(qOne);
+                console.log(q1max);
+                console.log(qFive);
+                
+                var xL = d3.scaleLinear()
+                    .domain([0, q1max])
+                    .range([0, window.innerHeight]);
+                    
+                var yL = d3.scaleLinear()
+                    .domain([0, data.length])
+                    .range([0, window.innerWidth]);
+                    
+                leftGraph.append('g')
+                    .attr('id', 'group')
+                    .attr("transform", "translate(0," + margin.top + ")");
+                    
+                var group = leftGraph.select('#group')
+                    .selectAll('g')
+                    .data(data)
+                    .enter()
+                    .append('g')
+                    .attr('y', function(d, i) { return yL(i); })
+                    .attr('transform', function(d, i) {
+                        return 'translate(0,' + (yL(i)) + ')';
+                });
+                    
+                // q1 bar
+                group.append('rect')
+                    .attr('class', 'bar')
+                    .attr('x', 0)
+                    .attr('y', function(d,i) { return (60 + (i*22)); })
+                    .attr('width', function(d, i) { return xL(d.q1); })
+                    .attr('height', 1);
+                
+                group.append('text')
+                    .text(function(d) { return (d.country) })
+                    .attr('transform', function(d, i) { return 'translate(0, '+ (53 + (i*22)) + ')'});
+                    
+                // Right graph
+                
+                var qFive = [];
+                for(var i in data) {
+                    qFive.push(data[i].q5);
+                }
+                var q5max = d3.max(qFive);
+                console.log(q5max);
+                console.log(qFive);
+                
+                var xR = d3.scaleLinear()
+                    .domain([q5max,0])
+                    .range([0, window.innerHeight]);
+                    
+                var yR = d3.scaleLinear()
+                    .domain([0, data.length])
+                    .range([0, window.innerWidth]);
+                
+                rightGraph.append('g')
+                    .attr('id', 'group')
+                    .attr("transform", "translate(" + window.innerWidth/2 + "," + margin.top + ")");
+                    
+                var group = rightGraph.select('#group')
+                    .selectAll('g')
+                    .data(data)
+                    .enter()
+                    .append('g')
+                    .attr('y', function(d, i) { return yR(i); })
+                    .attr('transform', function(d, i) {
+                        return 'translate(0' + ',' + (yR(i)) + ')';
+                });
+                    
+                // q5 bar
+                group.append('rect')
+                    .attr('class', 'bar')
+                    .attr('fill', 'red')
+                    .attr('x', 0)
+                    .attr('y', function(d,i) { return (60 + (i*22)); })
+                    .attr('width', function(d, i) { return xR(d.q5); })
+                    .attr('height', 1);
+                
+                group.append('text')
+                    .text(function(d) { return (d.country) })
+                    .attr('transform', function(d, i) { return 'translate(0, '+ (53 + (i*22)) + ')'});
+                
+            }
+            
+        </script>
+    </body>
+</html>
