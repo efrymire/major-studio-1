@@ -6,7 +6,12 @@ h1 {
 
 body {
     margin-left:20px;
+    margin-right:20px;
     font-family: arial, "Times New Roman", Times, serif;
     color: black;
     size: 12;
   }
+  
+.'key box'{
+    opacity: .5
+}
