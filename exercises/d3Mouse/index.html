@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style type="text/css">
+            body {
+                background: white;
+            }
+        </style>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <body>
+        <script>
+            d3.select('body')
+                .append('svg')
+                .attr('width', window.innerWidth)
+                .attr('height', window.innerHeight)
+                .on('mousemove', callback)
+                
+                function callback() {
+                    var pos = d3.mouse(this) // variable to find the d3 mouse position, and d3 will return a two element array of the mouse position (x and y)
+                    
+                    d3.select('svg')
+                        .insert('circle') // append vs insert is just to the bottom or to the top of the svg. if there were other elements in there then insert would be insert BEFORE other elements, where append would be to append AFTER other elements
+                            .attr('r',0)
+                            .attr('cx', pos[0])
+                            .attr('cy', pos[1])
+                            .style('fill','transparent')
+                            .style('stroke','black')
+                            .style('stroke-opacity',.5)
+                        .transition() // Returns a new transition on the given selection with the specified name. makes the circle go from 0 to 100 in 2 seconds
+                            .attr('r', 100)
+                            .ease(Math.sqrt) // this is just a transition for the circle
+                            .duration(2000) // this is in milliseconds, so this would be 2 seconds
+                            .remove()
+                }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+
+    <body>
+        <script>
+            d3.select('body')
+                .append('svg')
+                .attr('width', window.innerWidth)
+                .attr('height', window.innerHeight);
+                
+            var svg = d3.select('svg');
+            
+            d3.tsv('groceries.tsv', function(error, data) {
+                
+                console.log(data)
+                
+                // d = data, i = iterator
+                // data.forEach(function(d, i) {
+                //     svg.append('text')
+                //         // calls the text to fill the append of 'text'
+                //         .text(d.amount + ' | ' + d.unit + ' | ' + d.item + ' | ' + d.source)
+                //         .attr('x', window.innerWidth/2)
+                //         .attr('y', i*20 + 20) // spaces 20 pixles at a time
+                //         .style('text-anchor', 'middle')
+                //         .style('fill', function() {
+                //             if (d.source == 'store')
+                //                 return 'rgb(0,255,0)'
+                //             else
+                //                 return 'darkgray';
+                //             });
+                // });
+                
+                svg.selectAll('.item')
+                    .data(data) //protected method to take our data array of items and make that join (enchanted objects - have a specific d3 nomenclature that augment the data)
+                    // all the dom elements that are being generated hold the data ... evertyhing d3 needs to know to make/update it
+                    // d3 is yet another standard and we don't want to open these cans of worms
+                    .enter() // joined with the item -- take the array (for loop above) and join it with the data
+                    // .text(d.amount + ' | ' + d.unit + ' | ' + d.item + ' | ' + d.source)
+                    .append('text')
+                    // .text(function(d) { return d.amount + ' | ' + d.unit + ' | ' + d.item + ' | ' + d.source; })
+                    .text(function(d) { return d.amount + ' | ' + d.unit + ' | ' + d.item + ' | ' + d.source; })
+                    .attr('x', window.innerWidth/2)
+                    .attr('y', function(d, i) {return ((i+1)*20 + 20); })
+                    .style('text-anchor', 'middle')
+                    .style('fill', function(d) {
+                        if (d.source == 'store')
+                            return 'rgb(0,255,0)'
+                        else
+                            return 'darkgray'
+                        });
+                
+            });
+            
+        </script>
+    </body>
+</html>

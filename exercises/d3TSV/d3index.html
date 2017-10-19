@@ -20,9 +20,9 @@
                     svg.append('text')
                         // calls the text to fill the append of 'text'
                         .text(d.amount + ' | ' + d.unit + ' | ' + d.item + ' | ' + d.source)
-                        .attr('x', window.innerWidth/2)
+                        .attr('x', window.innerWidth)
                         .attr('y', i*20 + 20) // spaces 20 pixles at a time
-                        .style('text-anchor', 'middle')
+                        .style('text-anchor', 'end')
                         .style('fill', function() {
                             if (d.source == 'store')
                                 return 'rgb(0,255,0)'
@@ -30,6 +30,7 @@
                                 return 'darkgray';
                             });
                 });
+                
                 
             });
             

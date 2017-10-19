@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+    </head>
+    <style type="text/css">
+        svg {
+            font-family: sans-serif;
+            margin: 5px;
+            padding: 0;
+            border: 2px solid transparent;
+            background: lightgray;
+        }
+        svg:hover {
+            border: 2px solid black;
+        }
+        text.label {
+            text-anchor: middle;
+            text-size: 0.5em;
+        }
+    </style>
+    <body>
+        <script>
+            var min = 100000;
+            var max = 0;
+
+            d3.tsv("LaborInNonAgricultSector.tsv", function(error, data) {
+              if (error) throw error;
+
+                // console.log(data);
+                var mapX = d3.scaleLinear()
+                    .domain([0, 24])
+                    .range([10, 390]);
+                console.log(data);
+                
+                // to parse an array within min/max. if we find something that is gretaer than the current max, we make a new max (same with min). 
+                // d is the data that comes in, and the index number represents each year
+                data.forEach(function(d) {
+                    for (var col = 0; col < 24; col++) {
+                        var val = Object.keys(d)[col];
+                        if (min > parseFloat(d[val]))
+                            min = parseFloat(d[val]);
+                        if (max < parseFloat(d[val]))
+                            max = parseFloat(d[val]);
+                    }
+                });
+
+                console.log('min : ' + min + ' max: ' + max);
+
+                var mapY = d3.scaleLinear()
+                    .domain([min, max])
+                    .range([300, 0]);
+
+                d3.select('body')
+                    .data(data)  // bind data
+                    // for every row in the data file, we append an SVG
+                    .enter()  // sticky data
+                    .append('svg')
+                        .attr('width', 400)
+                        .attr('height', 300)
+                        .each(function(d, i) {
+                            // for each one of those, append both texts as well as a circle and a mouse overview
+                            // country name
+                            d3.select(this) // this = svg
+                                .append('text') // "this" refers to the d in the dom. in this case we only select THIS (not selectAll) -- where are we? in the svg element, so its the svg specific element in the dom
+                                    .attr('x', 10)
+                                    .attr('y', 25)
+                                    .text(function() { return d['Country Name']; });
+                            // each column
+                            for (var col = 0; col < 24; col++) {
+                                d3.select(this)
+                                    .append('text')
+                                        .attr('class', 'label') // formatted above
+                                        .attr('x', function() { return mapX(col); })
+                                        .attr('y', function() { return mapY(d[Object.keys(d)[col]]) - 5; })
+                                        .attr('visibility', 'hidden')
+                                        .text(function() { return d[Object.keys(d)[col]]; }); // this is what gives content to text
+                                // reaching back to the svg scope for "this" below
+                                d3.select(this)
+                                    .append('circle') // add dom element svg circle
+                                        .attr('r', 2.5)
+                                        .attr('cx', function() { return mapX(col); })
+                                        .attr('cy', function() { return mapY(d[Object.keys(d)[col]]); })
+                                    .on('mouseover', function() {
+                                        d3.select(this)
+                                            .style('fill', 'white');
+                                    })
+                                    .on('mouseout', function() {
+                                        d3.select(this)
+                                            .style('fill', 'blue');
+                                    });
+
+                            }
+                        }) // a global roll over is possible as long as you know where you are in the scope
+                        .on('mouseover', function() {
+                            d3.select(this).selectAll('text').attr('visibility', 'visible'); 
+                            // select(this)=SVG, then within that, select all text
+                            // if you remove select this, then they would all turn on when you roll over one of them
+                        })
+                        .on('mouseout', function() {
+                            d3.select(this).selectAll('text.label').attr('visibility', 'hidden');
+                        });
+            });
+        </script>
+    </body>
+</html>
