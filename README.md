@@ -19,15 +19,17 @@ visualization and information aesthetics.
 #### Circle of Equality
 
 The final project is an exploration of the Gini coefficient and Gender Inequality 
-Index as outlined by the UNDP. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+Index as outlined by the UNDP. 
+
+![preview.png](preview.png?raw=true)
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 Ut et nisi placerat, cursus tellus sed, scelerisque neque. Sed convallis diam eget sem 
 ultricies lobortis. Curabitur dapibus turpis at lobortis faucibus. Curabitur sed odio 
 ornare, faucibus eros et, lobortis dolor. Proin efficitur tortor quis sagittis consectetur. 
 Nullam condimentum, erat eu gravida vehicula, risus ligula maximus ante, id egestas 
 dolor elit vitae lorem. Aliquam non suscipit mauris. Aenean id sem interdum, interdum 
 nunc in, tempor odio. Integer non molestie lectus.
-
-![preview.png](preview.png?raw=true)
 
 Access the [project here.](https://efrymire.github.io/major-studio-1/UNDP_3_Dynamics/index.start.html)
 
