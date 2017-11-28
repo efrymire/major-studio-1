@@ -21,6 +21,8 @@ visualization and information aesthetics.
 The final project is an exploration of the Gini coefficient and Gender Inequality 
 Index as outlined by the UNDP. 
 
+[![preview.png](preview.png?raw=true)]
+
 #### Sources
 
 Odusola, Ayodele F., Giovanni Andrea Cornia, Haroon Bhorat, and Pedro Conceição. Income inequality trends in sub-Saharan Africa: divergence, determinants and consequences: overview. New York, NY: United Nations Development Programme, Regional Bureau for Africa, 2017.
