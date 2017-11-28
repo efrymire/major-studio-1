@@ -40,3 +40,7 @@ div > div > div:hover {
 .arcGini {
     transition: .3s;
 }
+
+.foreground {
+    transition: .3s;
+}

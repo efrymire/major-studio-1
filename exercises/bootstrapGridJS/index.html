@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href='bootstrap.min.css'>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">-->
+         <!--In bootstrap, the columns all add up to 12 (4/4/4, 6/6, 2/2/2/2/2/2, etc)-->
+        <title>
+            Bootstrap Grid
+        </title>
+        <style>
+            
+            body {
+                background-color: lightgray;
+            }
+        
+            div {
+                /*background-color:pink;*/
+                /*border: 1px solid white;*/
+                border-top: 1px solid black;
+                min-height:2em;
+            }
+            
+            div:hover {
+                border-top: 2px solid black;
+            }
+            
+            .row {
+                border-top: 0px;
+            }
+            
+            div > div > div:hover {
+            /*do you have a child called "div" and does THAT have a child called "div"?*/
+                background-color: snow;
+                font-weight:bolder;
+                transition: background-color .5s, border .5s;
+            }
+            
+            svg {
+                background-color: lavender;
+            }
+            
+            footer {
+                position:fixed;
+                width:100%;
+                bottom:0;
+                min-height: 50px;
+                box-shadow: 0px 0px 25px gray;
+            }
+            
+            footer div {
+                /*this is BOTH footer and div (not 'or')*/
+                border-top: 0px solid white;
+                font-size: small;
+                padding: 10px;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <!--Container-->
+        <div class="container">
+            <div class='row'>default to 12</div>
+            <div class="row">
+                <div class='col-3'>col-3</div>
+            </div>
+            <div class="row">
+                <!--you can have MORE THAN ONE class in an element-->
+                <div class='col-sm-12 col-md-10 col-lg-8 col-xl-6'>col-sm-12 col-md-10 col-lg-8 col-xl-6</div>
+            </div>
+            <div class="row">
+                <div class='col-lg-4 col-md-4 col-sm-6'>col-lg-4 col-md-4 col-sm-6</div>
+                <div class='col-lg-4 col-md-8 col-sm-6'>col-lg-4 col-md-8 col-sm-6</div>
+                <!--if the default for large is not possible, hide the content. Default to lg block because d-none applies to everything.
+                we need to override the d-none when the large block is available-->
+                <div class='col-lg-4 d-lg-block d-none'>
+                    <svg width=100% height=100%></svg>
+                    col-lg-4 d-lg-block d-none</div>
+            </div>
+        </div>
+        
+        <footer>
+            <div class='row'>
+                <div class='col-sm-3'></div>
+                <div class='col-sm-2'>Key</div>
+                <div class='col-sm-2'>Source</div>
+                <div class='col-sm-2'>Credits</div>
+                <div class='col-sm-3'></div>
+            </div>
+        </footer>
+    <script>
+        // take all col-lg-4 class elements and set the background color to pink on mouse over
+        d3.selectAll('.col-lg-4')
+            .on('mouseover', function() {
+                d3.select(this)
+                .style('background-color','pink')
+            })
+            .on('mouseout', function() {
+                d3.select(this)
+                .style('background-color','lightgray')
+            });
+            
+    </script>
+    </body>
+</html>

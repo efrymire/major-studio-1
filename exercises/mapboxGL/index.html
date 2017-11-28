@@ -1,0 +1,200 @@
+<!--<!DOCTYPE html>-->
+
+<!--<html>-->
+<!--    <head>-->
+<!--        <script src="https://d3js.org/d3.v4.min.js"></script>-->
+<!--        <script src='https://api.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>-->
+<!--        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.12.0/mapbox-gl.js'></script>-->
+        
+<!--        <style type='text/css'>-->
+        
+<!--            html, body, #wrapper {-->
+<!--                width: 100%;-->
+<!--                height: 100%;-->
+<!--                padding: 0;-->
+<!--                margin: 0;-->
+<!--            }-->
+            
+<!--            #map {-->
+<!--                position: relative;-->
+<!--                width: 100%;-->
+<!--                height:100%;-->
+<!--            }-->
+<!--        </style>-->
+        
+<!--    </head>-->
+    
+<!--    <body>-->
+        
+<!--        <div id='wrapper'>-->
+<!--            <div id='map'></div>-->
+<!--        </div>-->
+        
+<!--        <script>-->
+        
+<!--        d3.json("africa.geo.json", function(err, data) {-->
+<!--            draw(data);-->
+<!--        });-->
+        
+<!--        function draw(geojson) {-->
+<!--            mapboxgl.accessToken = 'pk.eyJ1IjoiZWxsaWVmcnkiLCJhIjoiY2o5enluZXB5MzBzYjMxcG9yMWI5d2xmdiJ9.pCo7CReR4UZ41AYPSXGgKA';-->
+<!--            var map = new mapboxgl.Map({-->
+<!--                container: 'map',-->
+<!--                style: 'mapbox://styles/mapbox/bright-v9',-->
+<!--                center: [18.2812, 9.1021],-->
+<!--                zoom: 4-->
+<!--            });-->
+            
+<!--            map.addControl(new mapboxgl.Navigation());-->
+            
+<!--            var container = map.getCanvasContainer();-->
+<!--            var svg = d3.select(container).append('svg');-->
+            
+<!--            var transform = d3.geoTransform({point:projectPoint});-->
+<!--            var path = d3.geoPath().projection(transform);-->
+            
+<!--            var featureElement = svg.selectAll('path')-->
+<!--                .data(geojson.features)-->
+<!--                .enter()-->
+<!--                .append('path')-->
+<!--                .attr('d', d3.geoPath().projection(transform))-->
+<!--                .attr('fill','lightgrey');-->
+             
+<!--            function update() {-->
+<!--                featureElement.attr('d', path);-->
+<!--            }-->
+            
+<!--            map.on('viewreset', update)-->
+               
+<!--            map.on('movestart', function() {-->
+                <!--// drag map-->
+<!--            });-->
+            
+<!--            map.on('rotate', function() {-->
+                <!--// drag map-->
+<!--            });-->
+            
+<!--            map.on('moveend', function() {-->
+                <!--// drag map ends-->
+<!--                update();-->
+<!--            });-->
+            
+<!--            update();-->
+                
+<!--            function projectPoint(lon, lat) {-->
+<!--                var point = map.project(new mapboxgl.LngLat(lon, lat));-->
+<!--                this.stream.point(point.x,point.y)-->
+<!--            }-->
+<!--        }-->
+            
+<!--        </script>-->
+        
+<!--    </body>-->
+    
+<!--</html>-->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.js'></script>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.42.0/mapbox-gl.css' rel='stylesheet' />
+
+        <style type="text/css">
+            html, body, #wrapper {
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+            }
+
+            #map {
+                position: relative;
+                width: 100%;
+                height: 100%;
+            }
+
+            svg {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+
+            .hidden {
+            	display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id='wrapper'>
+            <div id='map'></div>
+        </div>
+        <script>
+            d3.json("africa.geo.json", function(err, data) {
+                draw(data);
+            });
+
+
+            function draw(geojson){
+                mapboxgl.accessToken = 'pk.eyJ1IjoiZWxsaWVmcnkiLCJhIjoiY2o5enluZXB5MzBzYjMxcG9yMWI5d2xmdiJ9.pCo7CReR4UZ41AYPSXGgKA';
+                    var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/bright-v9',
+                    center: [18.2812, 9.1021], // 9.1021° N, 18.2812° E
+                    zoom: 4
+                });
+
+                map.addControl(new mapboxgl.NavigationControl());
+
+                var container = map.getCanvasContainer()
+                var svg = d3.select(container).append("svg")
+
+            	var transform = d3.geoTransform({point: projectPoint});
+            	var path = d3.geoPath().projection(transform); // https://github.com/d3/d3-3.x-api-reference/blob/master/Geo-Paths.md
+
+             	var featureElement = svg.selectAll("path")
+            		.data(geojson.features)
+            		.enter()
+                    .append("path")
+                    .attr("d", d3.geoPath().projection(transform))
+                    .attr("stroke", "none")
+                    .attr("fill", "lightgray")
+                    .attr("fill-opacity", 0.5)
+                    .on('mouseover', function(d) {
+                        console.log(d);
+                        d3.select(this).attr('fill', 'lightgreen');
+
+                    });
+
+                // text element for hover label, not used yet
+                svg.append("text")
+                    .attr('id', 'hover');
+
+                function update() {
+                    featureElement.attr("d", path);
+                }
+
+                map.on("viewreset", update)
+                map.on("movestart", function(){
+            		svg.classed("hidden", true);  // https://github.com/d3/d3-selection/blob/master/README.md#selection_classed
+            	});
+                map.on("rotate", function(){
+            		svg.classed("hidden", true);
+            	});
+                map.on("moveend", function(){
+            		update();
+            		svg.classed("hidden", false);
+            	});
+
+                update();
+
+            	function projectPoint(lon, lat) {
+                    var point = map.project(new mapboxgl.LngLat(lon, lat));
+            		this.stream.point(point.x, point.y); // https://github.com/d3/d3-geo/blob/master/README.md#transforms
+            	}
+            }
+
+        </script>
+    </body>
+</html>

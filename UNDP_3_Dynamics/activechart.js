@@ -59,7 +59,8 @@ function svg(data) {
         .style('width', '100%')
         .text( function(d) { return d.Country; })
         .on('click', function(e,a,j){ 
-            d3.selectAll('div').filter('.col-sm-12').style('background-color','white')
+            // d3.selectAll('div').filter('.col-sm-12').style('background-color','white')
+            d3.selectAll('div').filter('.list').style('color','black').style('')
             d3.selectAll('g').filter('.value').remove()
             d3.selectAll('text').filter('.value').remove()
             display.apply(this, [e,a,j,data])
@@ -69,7 +70,8 @@ function svg(data) {
 function display(e,a,j,data) {
 
     d3.select(this)
-        .style("background-color","#f2f2f2")
+        // .style("background-color","#f2f2f2")
+        .style('color','red')
         .attr('data-attr',a)
 
     var tau = 2 * Math.PI;
@@ -90,6 +92,7 @@ function display(e,a,j,data) {
         g = svg.append("g")
             .attr('class','value')
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+            
 
     // GINI CIRCLE
         
@@ -116,6 +119,11 @@ function display(e,a,j,data) {
                     .style('fill','red')
             });;
         
+        d3.interval(function() {
+            foreground.transition()
+            .duration(750);
+    });
+        
     } else {
         
         var foreground = g.append("path")
@@ -138,6 +146,7 @@ function display(e,a,j,data) {
                 d3.select('path.arcGini')
                     .style('fill','red')
             });
+        
     }
     
     // GII CIRCLE
@@ -195,6 +204,5 @@ function display(e,a,j,data) {
         .style('text-anchor', 'middle')
         .style('font-weight','bold')
         .attr("dy", "-2em")
-        .attr('class','countryText')
-        
+        .attr('class','countryText');
 }

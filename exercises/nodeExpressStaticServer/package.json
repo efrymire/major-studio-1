@@ -1,0 +1,14 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "Static Node Express Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "EF",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}

@@ -65,7 +65,8 @@ div > div > div:hover {
 }
 
 .start {
-    background-color: #f2f2f2
+    background-color: #f2f2f2;
+    top:50%;
 }
 
 .start:hover {
