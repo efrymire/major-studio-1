@@ -23,6 +23,8 @@ Index as outlined by the UNDP.
 
 ![preview.png](preview.png?raw=true)
 
+Access the project here. [xxx](https://efrymire.github.io/major-studio-1/UNDP_3_Dynamics/index.start.html)
+
 #### Sources
 
 Odusola, Ayodele F., Giovanni Andrea Cornia, Haroon Bhorat, and Pedro Conceição. Income inequality trends in sub-Saharan Africa: divergence, determinants and consequences: overview. New York, NY: United Nations Development Programme, Regional Bureau for Africa, 2017.
