@@ -21,7 +21,7 @@ visualization and information aesthetics.
 The final project is an exploration of the Gini coefficient and Gender Inequality 
 Index as outlined by the UNDP. 
 
-[![preview.png](preview.png?raw=true)]
+![preview.png](preview.png?raw=true)
 
 #### Sources
 
