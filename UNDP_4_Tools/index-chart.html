@@ -2,7 +2,7 @@
 <html>
     <head>
         <script src="https://d3js.org/d3.v4.min.js"></script>
-        <title> GINI & GII </title>
+        <title> Circle of Equality </title>
         <link href="chart_style.css" type="text/css" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
@@ -10,17 +10,22 @@
     </head>
 
     <body>
-        <script src="activechart.js"></script>
+        <script src="halfcircles.js"></script>
 
         <div class='row break'></div>
         <div class="container">
+            <div class='row' id="buttonContainer">
+                <div class='col-md-3 col-sm-6 button'>
+                    <button id="sortMale">Sort by Male Index</button></div>
+                <div class='col-md-3 col-sm-6 button'>
+                    <button id="sortFemale">Sort by Female Index</button></div>
+                <div class='col-md-3 col-sm-6 button'>
+                    <button id="sortGii">Sort by overall Gender Inequality Index</button></div>
+                <div class='col-md-3 col-sm-6 button'>
+                    <button id="sortGini">Sort by Gini Coefficient</button></div>
             </div>
-            <div class='row'>
-                <div class='col-md-2 col-sm-1'></div>
-                <div class='col-md-3 col-sm-2 list'></div>
-                <div class='col-md-7 col-sm-9 main'>
-                    <svg width=500 height=100% id='content'></svg>
-                </div>
+            <div class='row break'></div>
+            <div class='row content'>
             </div>
         </div>
         <div class='row break'></div>

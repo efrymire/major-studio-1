@@ -16,35 +16,40 @@
     overflow: visible;
 }
 
-div > div {
-    text-align: left;
+button {
+    border:none;
+    border-radius: 12px;
+    height:70px; 
+    width:200px;
+    position:relative;
+    
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 }
 
-
-svg {
-    display: block;
-    margin: 0 auto;
-    position: fixed;
-    right: calc(50% - 24px);
-    left: calc(50% - 24px);
+button:hover {
+    background-color: lightgrey;
+    /*color: white;*/
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
-#content {
-    float:left;
-}
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, -1px, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(2px, 2px, 0);
+  }
 
-div > div > div:hover {
-    font-weight:bolder;
-}
+  30%, 50%, 70% {
+    transform: translate3d(-2px, 0, 0);
+  }
 
-.arcGii {
-    transition: .3s;
-}
-
-.arcGini {
-    transition: .3s;
-}
-
-.foreground {
-    transition: .3s;
+  40%, 60% {
+    transform: translate3d(2px, 0, 0);
+  }
 }

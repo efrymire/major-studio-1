@@ -77,9 +77,8 @@ function svg(data) {
     d3.select('div.list')
         .selectAll('div').data(data).enter()
         .append('div')
-        .attr('class','col-sm-12')
-        .attr('class','listText')
-        .style('width', '100%')
+        .attr('class','col-sm-2 listText')
+        .style('width', '30%')
         .text( function(d) { 
             return d.Country; })
         .on('click', function(e,a,j){ 
