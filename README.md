@@ -21,7 +21,7 @@ visualization and information aesthetics.
 The final project is an exploration of the Gini coefficient and Gender Inequality 
 Index as outlined by the UNDP. 
 
-![drawing.jpg](images/drawing.jpg?raw=true)
+![drawing.png](images/drawing.png?raw=true)
 
 This data visualization compares both male and female gender indexes to easily 
 visualize the gender gap. By including the Gini coefficient, we can easily 
