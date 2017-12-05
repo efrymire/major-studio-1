@@ -76,7 +76,7 @@
 .large-break {
     width:100%;
     top:0px;
-    min-height:300px;
+    min-height:200px;
     overflow: visible;
 }
 
@@ -87,19 +87,16 @@
     overflow: visible;
 }
 
-button {
+.button {
     border:2px;
-    border-color: red;
     border-radius: 12px;
     height:70px;
     width:200px;
     position:relative;
-    background-color: lightgray;
 
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
 
-button:hover {
-    background-color: black;
-    color: white;
+.button:hover {
+    background-color: lightgrey;
 }
