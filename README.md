@@ -21,13 +21,13 @@ visualization and information aesthetics.
 The final project is an exploration of the Gini coefficient and Gender Inequality 
 Index as outlined by the UNDP. 
 
-![drawing2.jpg](drawing2.jpg?raw=true)
+![drawing.jpg](images/drawing.jpg?raw=true)
 
 This data visualization compares both male and female gender indexes to easily 
 visualize the gender gap. By including the Gini coefficient, we can easily 
 explore how inequality between genders relates to income inequality. 
 
-![preview1.png](preview1.png?raw=true)
+![preview1.png](images/preview1.png?raw=true)
 
 Using small multiples, the user can compare both gender and income inequality 
 accross Africa and sort by the elements that comprise gender inequality, the 
