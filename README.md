@@ -21,17 +21,19 @@ visualization and information aesthetics.
 The final project is an exploration of the Gini coefficient and Gender Inequality 
 Index as outlined by the UNDP. 
 
-![preview.png](preview.png?raw=true)
+![drawing2.jpg](drawing2.jpg?raw=true)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-Ut et nisi placerat, cursus tellus sed, scelerisque neque. Sed convallis diam eget sem 
-ultricies lobortis. Curabitur dapibus turpis at lobortis faucibus. Curabitur sed odio 
-ornare, faucibus eros et, lobortis dolor. Proin efficitur tortor quis sagittis consectetur. 
-Nullam condimentum, erat eu gravida vehicula, risus ligula maximus ante, id egestas 
-dolor elit vitae lorem. Aliquam non suscipit mauris. Aenean id sem interdum, interdum 
-nunc in, tempor odio. Integer non molestie lectus.
+This data visualization compares both male and female gender indexes to easily 
+visualize the gender gap. By including the Gini coefficient, we can easily 
+explore how inequality between genders relates to income inequality. 
 
-Access the [project here.](https://efrymire.github.io/major-studio-1/UNDP_3_Dynamics/index.start.html)
+![preview1.png](preview1.png?raw=true)
+
+Using small multiples, the user can compare both gender and income inequality 
+accross Africa and sort by the elements that comprise gender inequality, the 
+overall gender inequality index for that country, and the gini coefficient.
+
+Access the [project here.](https://efrymire.github.io/major-studio-1/UNDP_3_Dynamics/index-chart.html)
 
 #### Sources
 
