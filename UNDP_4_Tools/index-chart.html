@@ -10,7 +10,7 @@
     </head>
 
     <body>
-        <script src="circles.js"></script>
+        <script src="circles.test.js"></script>
         
         <div class='row break'></div>
         
@@ -19,21 +19,24 @@
                 <div class='col-md-12 col-sm-12 header'>Exploring Equality</div>
             </div>
             <div class='row'>
-                <div class='col-md-12 col-sm-12'>Visualizing the relationship between gender inequality and income inequality</div>
+                <div class='col-md-12 col-sm-12 sub-header'>Visualizing the relationship between gender inequality and income inequality</div>
             </div>
             
             <div class='row break'></div>
 
             <div class="row">
                 <div class='col-md-12 col-sm-12'>
-
-                    The September 2015 adoption of the 2030 Agenda for Sustainable Development and its 17 Sustainable
+                    
+                    The UNDP has stated the following in the book Income Inequality in Sub-Saharan Africa: <br><br>
+                    
+                    <div class="quote">
+                    <i>The September 2015 adoption of the 2030 Agenda for Sustainable Development and its 17 Sustainable
                     Development Goals (SDGs) has drawn considerable attention to income inequality in sub-Saharan
                     Africa (SSA). To achieve the goal of "leaving no one behind" by 2030, the UNDP Regional Bureau
                     for Africa feels very strongly that inequality levels, trends, determinants and consequences in
-                    the region must be documented properly.
+                    the region must be documented properly. <br><br>
 
-                    The basic structural drivers of inequality can be divided into three groups: <br><br> 
+                    The basic structural drivers of inequality can be divided into three groups: <br> 
                     
                     (i) the highly
                     dualistic economic structure, with limited employment of the labour elite in the government,
@@ -42,15 +45,20 @@
                         
                     (ii) the high concentration of physical
                     capital, human capital and land, especially in the economies of East and Southern Africa, in
-                    certain groups or regions; <br> and (iii) the limited distributive capacity of the state, which often
+                    certain groups or regions; <br> 
+                    
+                    and (iii) the limited distributive capacity of the state, which often
                     manifests in the "natural resource curse", the urban bias of public policy and ethnic and gender
                     inequalities.
                     
+                    </i>
+                    </div>
                     <br><br>
                     This project aims to explore both (i) and (iii) by visualizing the relationship between gender inequality 
                     and income inequality in Africa. The metrics used to construct this data visualization include a
-                    breakdown of the Gender Inequality Index and the Gini coefficient.
-
+                    breakdown of the Gender Inequality Index and the Gini coefficient. More information, including context, code, 
+                    and sources can be found <a href=" https://github.com/efrymire/major-studio-1">here.</a>
+                    
                 </div>
             </div>
             
@@ -81,12 +89,15 @@
                         
                         <div class='col-md-21 col-sm-12'>
                             
-                            The Gender Inequality Index (GII) measures gender inequalities in three important aspects of human
-                            development-reproductive health, measured by maternal mortality ratio and adolescent birth rates;
-                            empowerment, measured by proportion of parliamentary seats occupied by females and proportion of
-                            adult females and males aged 25 years and older with at least some secondary education; and
-                            economic status, expressed as labour market participation and measured by labour force
-                            participation rate of female and male populations aged 15 years and older.
+                            The Gender Inequality Index (GII) measures gender inequalities 
+                            in three important aspects of human development-reproductive health, 
+                            measured by maternal mortality ratio and adolescent birth rates; empowerment, 
+                            measured by proportion of parliamentary seats occupied by females and proportion 
+                            of adult females and males aged 25 years and older with at least some secondary 
+                            education; and economic status, expressed as labour market participation and 
+                            measured by labour force participation rate of female and male populations 
+                            aged 15 years and older. A value of 0 represents perfect equality, while an 
+                            index of 100 implies perfect inequality.
                         
                         </div> 
                         
@@ -98,10 +109,14 @@
                         
                         <div class='col-md-12 col-sm-12'>
                         
-                            The Gini Coefficient is used to measure a country's inequality by comparing distribution of income.
-                            Inequality on the Gini scale is measured between 0, a score which would suggest that everybody is
-                            be equal, and 1, a score which would suggest that all the country's income is earned by a single
-                            person.
+                            As stated by the World Bank, the Gini index measures the extent to which the 
+                            distribution of income among individuals or households deviates from a perfectly 
+                            equal distribution. A Lorenz curve plots the cumulative percentages of total 
+                            income received against the cumulative number of recipients, starting with the 
+                            poorest individual or household. The Gini index measures the area between the 
+                            Lorenz curve and a hypothetical line of absolute equality, expressed as a 
+                            percentage of the maximum area under the line. Similar to GII, a value of 0 
+                            represents perfect equality, while an index of 100 implies perfect inequality.
     
                     </div>
                     
@@ -148,17 +163,28 @@
             <div class='row'>
                 <div class='col-md-6 col-sm-12 '>
 
-                    The Gender Inequality Index measures gender inequalities in three important aspects of human
-                    development—reproductive health, measured by maternal mortality ratio and adolescent birth rates;
-                    empowerment, measured by proportion of parliamentary seats occupied by females and proportion of
-                    adult females and males aged 25 years and older with at least some secondary education; and
-                    economic status, expressed as labour market participation and measured by labour force
-                    participation rate of female and male populations aged 15 years and older.
-
-                    The Gini Coefficient is used to measure a country's inequality by comparing distribution of income.
-                    Inequality on the Gini scale is measured between 0, a score which would suggest that everybody is
-                    be equal, and 1, a score which would suggest that all the country's income is earned by a single
-                    person.
+                    Ayodele states in Income Inequality Trends in Sub-Saharan Africa that as the economic 
+                    status of women improves, so does the economic status of entire families. This 
+                    visualization intends to show clear relationships between gender and income inequality, 
+                    as well as educate the user on the calculation of male and female indexes. By 
+                    understanding the impact of gender equality on income equality, and the difference 
+                    in male and female indexes, we can work to raise female indexes, thus lowering gender 
+                    and income inequality.
+                    
+                    <br>
+                    <br>
+                    This visualization includes a comparison of GII and GINI as well as male and female 
+                    indexes. As stated above, male and female indexes are used to calculate the GII. The 
+                    circles are placed on top of a grey outline. The black circle represents the GII value, 
+                    while the red circle represents the GINI value. In the related view, the black circle 
+                    represents the male index, and the red circle indicates the female index.
+                    
+                    <br>
+                    <br>
+                    To begin, select a view of “Comparing Gender and Income Inequality” or “Comparing Male 
+                    and Female Indexes”. The small multiples will appear below, and the Sort buttons are 
+                    available to rearrange the data. Rollover the data for more information and to see 
+                    each result separately. 
 
                 </div>
 
@@ -184,21 +210,21 @@
             <div class='row break'></div>
 
             <div class='row' id="buttonContainer">
-                <div class='col-md-6 col-sm-12 button'>
-                    <button id="coeff">Compare Gender and Income Inequality</button></div>
-                <div class='col-md-6 col-sm-12 button'>
-                    <button id="indexes">Compare Male and Female Indexes</button></div>
+                <div class='col-md-6 col-sm-12'>
+                    <button id="coeff" class="button">Compare Gender and Income Inequality</button></div>
+                <div class='col-md-6 col-sm-12'>
+                    <button id="indexes" class="button">Compare Male and Female Indexes</button></div>
                 
                         <div class='row small-break'> </div>    
                 
-                <div class='col-md-3 col-sm-6 button'>
-                    <button id="sortMale">Sort by Male Index</button></div>
-                <div class='col-md-3 col-sm-6 button'>
-                    <button id="sortFemale">Sort by Female Index</button></div>
-                <div class='col-md-3 col-sm-6 button'>
-                    <button id="sortGii">Sort by overall Gender Inequality Index</button></div>
-                <div class='col-md-3 col-sm-6 button'>
-                    <button id="sortGini">Sort by Gini Coefficient</button></div>
+                <div class='col-md-3 col-sm-6'>
+                    <button id="sortMale" class="button">Sort by Male Index</button></div>
+                <div class='col-md-3 col-sm-6'>
+                    <button id="sortFemale" class="button">Sort by Female Index</button></div>
+                <div class='col-md-3 col-sm-6'>
+                    <button id="sortGii" class="button">Sort by overall Gender Inequality Index</button></div>
+                <div class='col-md-3 col-sm-6'>
+                    <button id="sortGini" class="button">Sort by Gini Coefficient</button></div>
             </div>
 
             <div class='row break'></div>

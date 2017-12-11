@@ -19,19 +19,19 @@ visualization and information aesthetics.
 #### Circle of Equality
 
 The final project is an exploration of the Gini coefficient and Gender Inequality 
-Index as outlined by the UNDP. 
+Index as outlined by the UNDP. Ayodele states in Income Inequality Trends in 
+Sub-Saharan Africa that as the economic 
+status of women improves, so does the economic status of entire families. This 
+visualization intends to show clear relationships between gender and income inequality, 
+as well as educate the user on the calculation of male and female indexes. By 
+understanding the impact of gender equality on income equality, and the difference 
+in male and female indexes, we can work to raise female indexes, thus lowering gender 
+and income inequality.
 
 ![drawing.png](images/drawing.png?raw=true)
 
-This data visualization compares both male and female gender indexes to easily 
-visualize the gender gap. By including the Gini coefficient, we can easily 
-explore how inequality between genders relates to income inequality. 
+![preview1.png](images/preview.png?raw=true)
 
-![preview1.png](images/preview1.png?raw=true)
-
-Using small multiples, the user can compare both gender and income inequality 
-accross Africa and sort by the elements that comprise gender inequality, the 
-overall gender inequality index for that country, and the gini coefficient.
 
 Access the [project here.](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index-chart.html)
 
