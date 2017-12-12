@@ -30,7 +30,7 @@ and income inequality.
 
 [![circles.png](images/circles.png?raw=true)](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index.html)
 
-[![preview1.png](images/preview.png?raw=true)](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index.html)
+[![preview1.png](images/preview1.png?raw=true)](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index.html)
 
 
 Access the [project here.](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index.html)
