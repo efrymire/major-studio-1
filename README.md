@@ -39,4 +39,6 @@ Access the [project here.](https://efrymire.github.io/major-studio-1/UNDP_4_Tool
 
 Odusola, Ayodele F., Giovanni Andrea Cornia, Haroon Bhorat, and Pedro Conceição. Income inequality trends in sub-Saharan Africa: divergence, determinants and consequences: overview. New York, NY: United Nations Development Programme, Regional Bureau for Africa, 2017.
 
+"World Development Indicators 2016." Distribution of Income or Consumption, September 18, 2017. doi:10.1596/978-1-4648-0683-4.
 
+"Human Development Reports." Gender Inequality Index (GII). doi:10.18356/c8fa8884-en.
