@@ -28,7 +28,7 @@ understanding the impact of gender equality on income equality, and the differen
 in male and female indexes, we can work to raise female indexes, thus lowering gender 
 and income inequality.
 
-[![GGcircles.png](images/GGcircles.png?raw=true)](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index.html)
+[![circles.png](images/circles.png?raw=true)](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index.html)
 
 [![preview1.png](images/preview.png?raw=true)](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index.html)
 
