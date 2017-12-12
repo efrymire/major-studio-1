@@ -16,11 +16,11 @@ successfully and critically apply their skills of communication design to data
 visualization and information aesthetics.
 
 ### About the Final Project
-#### Circle of Equality
+#### Exploring Equality
 
 The final project is an exploration of the Gini coefficient and Gender Inequality 
-Index as outlined by the UNDP. Ayodele states in Income Inequality Trends in 
-Sub-Saharan Africa that as the economic 
+Index as outlined by the UNDP. The text *Income Inequality Trends in 
+Sub-Saharan Africa* states that as the economic 
 status of women improves, so does the economic status of entire families. This 
 visualization intends to show clear relationships between gender and income inequality, 
 as well as educate the user on the calculation of male and female indexes. By 
