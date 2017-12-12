@@ -33,7 +33,7 @@ and income inequality.
 ![preview1.png](images/preview.png?raw=true)
 
 
-Access the [project here.](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index-chart.html)
+Access the [project here.](https://efrymire.github.io/major-studio-1/UNDP_4_Tools/index.html)
 
 #### Sources
 
