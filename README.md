@@ -28,7 +28,7 @@ understanding the impact of gender equality on income equality, and the differen
 in male and female indexes, we can work to raise female indexes, thus lowering gender 
 and income inequality.
 
-![drawing.png](images/drawing.png?raw=true)
+![GGcircles.png](images/GGcircles.png?raw=true)
 
 ![preview1.png](images/preview.png?raw=true)
 

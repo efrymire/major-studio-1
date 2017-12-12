@@ -1,4 +1,4 @@
-d3.csv('data.csv', function(error, data) {
+d3.csv('data2.csv', function(error, data) {
     if (error) throw error;
     
     d3.select("#coeff")
@@ -18,16 +18,16 @@ function coeff(data) {
 // ------------ SETUP ------------
     
     var groups = d3.select('div.content')
-            .selectAll('div')
-            .data(data.filter(function(d){return d.region == 'Africa'}))
-            .enter()
-            .append('div')
-                .attr('class', function(d) { return 'col-md-2 col-sm-3 circle ' + d.country })
-                .attr('width','150')
-                .attr('height','150')
+        .selectAll('div')
+        .data(data.filter(function(d){return d.region == 'Africa'}))
+        .enter()
+        .append('div')
+            .attr('class', function(d) { return 'col-md-2 col-sm-3 circle ' + d.country })
+            .attr('width','150')
+            .attr('height','150')
                 
     var backRadius = (100 / 3.14) ^ (1 / 2);
-    function giiRadius(d) { return ((d.gii_rep * 100) / 3.14) ^ (1 / 2) };
+    function giiRadius(d) { return ((d.gii_rep  ) / 3.14) ^ (1 / 2) };
     function giniRadius(d) { return ((d.gini) / 3.14) ^ (1 / 2) };
             
     var div = d3.selectAll("div.circle"),
@@ -37,7 +37,7 @@ function coeff(data) {
     div.append('svg')
         .attr('width','150')
         .attr('height','150')
-        .attr('class','coeff-svgs')
+        .attr('class','svg')
         .on('mouseover', function() {
             d3.select(this).select('.gini')
                 .transition().duration(300)
@@ -57,7 +57,15 @@ function coeff(data) {
                 .transition().duration(300)
                 .attr('cx',svgWidth/2)
                 .attr('cy',function(d) { return [(svgHeight/2) + (backRadius) - (giiRadius(d))]})
-        })
+            d3.select(this).selectAll('circle.info')
+                .transition().duration(5000)
+                .style('opacity',0)
+                .attr('cy', window.innerHeight)
+            d3.select(this).selectAll('text.info')
+                .transition().duration(5000)
+                .style('opacity',0)
+                .attr('transform', 'translate (0,' + [window.innerHeight + (svgWidth/2)] + ')')
+            })
         
     var svg = d3.selectAll("svg")
         svgWidth = svg.attr('width'),
@@ -88,7 +96,11 @@ function coeff(data) {
         })
     
     var gini = svg.append('circle')
-        .style("fill", "red")
+        .style("fill", function(d) {
+            if (d.hdi == 'very high') {return 'blue' }
+            if (d.hdi == 'medium') {return 'orange' }
+            if (d.hdi == 'low') {return 'red'}
+        })
         .attr('class', 'gini')
         .attr('r',giniRadius)
         .attr('cx',svgWidth/2)
@@ -119,20 +131,67 @@ function coeff(data) {
         
     var giiTip = svg.append('text')
         .attr('class','giiTip')
-        .text(function(d) { return 'gii: ' + (d.gii_rep*100) } )
+        .text(function(d) { return 'gii: ' + (d.gii_rep ) } )
         .attr('transform', 'translate(' + svgWidth/2 +  ',140)')
         .style('fill','grey')
         .style('display','none')
         .style('text-anchor', 'middle')
+        
+// ------------ ON CLICK  ------------ 
+    
+    d3.selectAll('.svg')
+		.on('click', function() {
+            d3.select(this).append('circle')
+                .attr('class','info')
+                .attr('r', 100)
+                .attr('cx',svgWidth/2)
+                .attr('cy',svgHeight/2)
+                .style('fill','black')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text(function(d) { return d.seced_f + '% females' })
+                .style('fill','red')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2-50] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text('with at least some')
+                .style('fill','white')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2-30] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text('secondary education')
+                .style('fill','white')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2-10] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text(function(d) { return d.labour_f + '% females'  })
+                .style('fill','red')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2+10] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text('participating in')
+                .style('fill','white')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2+30] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text('labor force')
+                .style('fill','white')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2+50] + ')')
+            })
         
 // ------------ SORTING DATA  ------------ 
         
     d3.select("#sortMale")
 		.on("click", function() {
 			groups.sort(function(b, a){
-            return a["male_index"]-b["male_index"];
-        })})
-        
+                return a["male_index"]-b["male_index"];})
+		})
         
     d3.select("#sortFemale")
 		.on("click", function() {
@@ -168,8 +227,8 @@ function indexes(data) {
                 .attr('height','150')
                 
     var backRadius = (100 / 3.14) ^ (1 / 2);
-    function maleRadius(d) { return ((d.male_index * 100) / 3.14) ^ (1 / 2) };
-    function femaleRadius(d) { return ((d.female_index * 100) / 3.14) ^ (1 / 2) };
+    function maleRadius(d) { return ((d.male_index  ) / 3.14) ^ (1 / 2) };
+    function femaleRadius(d) { return ((d.female_index  ) / 3.14) ^ (1 / 2) };
             
     var div = d3.selectAll("div.circle");
     var divWidth = div.attr('width');
@@ -178,7 +237,7 @@ function indexes(data) {
     div.append('svg')
         .attr('width','150')
         .attr('height','150')
-        .attr('class','indexes-svgs')
+        .attr('class','svg')
         .on('mouseover', function() {
             d3.select(this).select('.female')
                 .transition().duration(300)
@@ -198,7 +257,14 @@ function indexes(data) {
                 .transition().duration(300)
                 .attr('cx', svgWidth/2)
                 .attr('cy', function(d) { return [(svgHeight/2) + (backRadius) - (maleRadius(d))]})
-        
+            d3.select(this).selectAll('circle.info')
+                .transition().duration(5000)
+                .style('opacity',0)
+                .attr('cy', window.innerHeight)
+            d3.select(this).selectAll('text.info')
+                .transition().duration(5000)
+                .style('opacity',0)
+                .attr('transform', 'translate (0,' + [window.innerHeight + (svgWidth/2)] + ')') 
         })
         
     var svg = d3.selectAll("svg")
@@ -229,7 +295,11 @@ function indexes(data) {
         })
     
     var female = svg.append('circle')
-        .style("fill", "red")
+        .style("fill", function(d) {
+            if (d.hdi == 'very high') {return 'blue' }
+            if (d.hdi == 'medium') {return 'orange' }
+            if (d.hdi == 'low') {return 'red'}
+        })
         .attr('class', 'female')
         .attr('r',femaleRadius)
         .attr('cx', svgWidth/2)
@@ -252,7 +322,7 @@ function indexes(data) {
         
     var maleTip = svg.append('text')
         .attr('class','maleTip')
-        .text(function(d) { return 'male index: ' + [d.male_index*100]} )
+        .text(function(d) { return 'male index: ' + [d.male_index ]} )
         .attr('transform', 'translate(' + svgWidth/2 +  ',140)')
         .style('fill','grey')
         .style('text-anchor', 'middle')
@@ -260,11 +330,59 @@ function indexes(data) {
         
     var femaleTip = svg.append('text')
         .attr('class','femaleTip')
-        .text(function(d) { return 'female index: ' + [d.female_index*100]} )
+        .text(function(d) { return 'female index: ' + [d.female_index ]} )
         .attr('transform', 'translate(' + svgWidth/2 +  ',140)')
         .style('fill','grey')
         .style('display','none')
         .style('text-anchor', 'middle')
+        
+// ------------ ON CLICK  ------------ 
+    
+    d3.selectAll('.svg')
+		.on('click', function() {
+            d3.select(this).append('circle')
+                .attr('class','info')
+                .attr('r', 100)
+                .attr('cx',svgWidth/2)
+                .attr('cy',svgHeight/2)
+                .style('fill','black')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text(function(d) { return d.mat_mort_ratio })
+                .style('fill','red')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2-50] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text('maternal deaths')
+                .style('fill','white')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2-30] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text('per 100,000 live births')
+                .style('fill','white')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2-10] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text(function(d) { return d.adol_birth_rate })
+                .style('fill','red')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2+10] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text('births per 1,000 women')
+                .style('fill','white')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2+30] + ')')
+            d3.select(this).append('text')
+                .attr('class','info')
+                .text('aged 15-18')
+                .style('fill','white')
+                .style('text-anchor','middle')
+                .attr('transform', 'translate(' + svgWidth/2 +  ',' + [svgHeight/2+50] + ')')
+            })
         
 // ------------ SORTING DATA ------------ 
         
